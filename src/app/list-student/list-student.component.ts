@@ -57,8 +57,10 @@ export class ListStudentComponent implements OnInit,OnDestroy{
   }
 
   onLogout(){
-    this._studentAdmin.logout();
-    this.router.navigate(["/login"]);
+    if(window.confirm("Are you sure to logout?")){
+      this._studentAdmin.logout();
+      this.router.navigate(["/login"]);
+    }  
   }
 
   onLogin(){
