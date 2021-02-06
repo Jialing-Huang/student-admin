@@ -32,7 +32,7 @@ export class CrudService {
   //  以及不同格式的_id，所以用两层.map()来转换
 
   getStudents(): Observable<Student[]> {
-    return this.http.get<{ students: any }>("http://localhost:3000/student/students")
+    return this.http.get<{ students: any }>("http://localhost:8080/student/students")
       .pipe(
         map(data => {
           return data.students
@@ -60,7 +60,7 @@ export class CrudService {
 
   //  同上，这里只需要用一层.map()来转换
   getStudentItem(mongoid: string): Observable<Student> {
-    return this.http.get<{ detail: any }>("http://localhost:3000/student/student/" + mongoid)
+    return this.http.get<{ detail: any }>("http://localhost:8080/student/student/" + mongoid)
       .pipe(
         map(item => {
           return {
@@ -104,7 +104,7 @@ export class CrudService {
     this.newStudent.PhotoPath = photopath;
     this.newStudent.DocumentPath = documentpath;
 
-    this.http.post<{ student: any }>("http://localhost:3000/student/add", this.newStudent)
+    this.http.post<{ student: any }>("http://localhost:8080/student/add", this.newStudent)
       .pipe(
         catchError(error => { return throwError(error); })
       )
@@ -144,14 +144,14 @@ export class CrudService {
       DocumentPath: documentpath
     };
 
-    return this.http.patch<{ message: string }>("http://localhost:3000/student/update/" + mongoid, updatingContent)
+    return this.http.patch<{ message: string }>("http://localhost:8080/student/update/" + mongoid, updatingContent)
       .pipe(
         catchError(error => { return throwError(error); })
       );
   }
 
   deleteStudent(mongoid: string): Observable<any> {
-    return this.http.delete<{ message: string }>("http://localhost:3000/student/delete/" + mongoid)
+    return this.http.delete<{ message: string }>("http://localhost:8080/student/delete/" + mongoid)
       .pipe(
         catchError(error => { return throwError(error); })
       );

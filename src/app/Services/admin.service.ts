@@ -26,7 +26,7 @@ export class AuthService {
   addAdmin(email:string, password:string):Observable<any>{
     const registerdata:Admin = { Email:email, Password:password};
     
-    return this.http.post<{message:any}>("http://localhost:3000/admin/register", registerdata)
+    return this.http.post<{message:any}>("http://localhost:8080/admin/register", registerdata)
                     .pipe(
                       catchError(error => { return throwError(error); })
                     );
@@ -37,7 +37,7 @@ export class AuthService {
     this.logindata.Email = email;
     this.logindata.Password = password;
 
-    this.http.post<{token:string, expiresIn:number}>("http://localhost:3000/admin/login",this.logindata)
+    this.http.post<{token:string, expiresIn:number}>("http://localhost:8080/admin/login",this.logindata)
                     .pipe(
                           catchError(error => { return throwError(error); })
                         )
