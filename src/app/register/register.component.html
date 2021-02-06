@@ -1,0 +1,25 @@
+<form #f = ngForm >
+    <div class="container">
+        
+        <h3 class="card-title">Add Admin</h3>
+                    
+        <div class="card-body">
+            
+            <div class="form-group">
+                <label for="Email">Email: </label>
+                <input id="Email" pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" [(ngModel)]="admin.Email" name="emailinput" #EmailControl="ngModel" type="text" required class="form-control">
+                <span *ngIf="EmailControl.invalid && EmailControl.touched" style="color:red;" class="help-block">Email is required or input pattern is incorrect</span>
+            </div>  
+        
+            <div class="form-group" >
+                <label for="Password">Password: </label>
+                <input id="Password" [(ngModel)]="admin.Password" name="passwordinput" #PasswordControl="ngModel" type="text" required class="form-control">
+                <span *ngIf="PasswordControl.invalid && PasswordControl.touched" style="color:red;" class="help-block">Password is required</span>
+            </div>           
+                
+        </div>
+        <div class="panel-footer">
+            <button class="btn btn-primary btn-space btn-width" [disabled]="f.invalid" (click)="register(admin.Email,admin.Password)">Submit</button>            
+        </div>
+    </div>
+    </form>

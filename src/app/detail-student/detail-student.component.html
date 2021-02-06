@@ -1,0 +1,69 @@
+<div class=" container">
+    <div class="row">
+        <h3 class="card-title">Personel Info</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="card-text col-xl-8 font-weight-bold">
+                <div class="row">
+                    <div class="col-xl-2">First Name:</div>
+                    <div class="col-xl-4">{{student.FirstName}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-2">Last Name:</div>
+                    <div class="col-xl-4">{{student.LastName}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-2">Gender:</div>
+                    <div class="col-xl-4">{{student.Gender}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-2">BirthDate:</div>
+                    <div class="col-xl-4">{{student.BirthDate | date}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-2">Email:</div>
+                    <div class="col-xl-4">{{student.Email}}</div>
+                </div>
+            </div>
+            <div style="left: auto;"   class="col-xl-4">
+                <img src={{student.PhotoPath}} width="150" height="150">
+            </div>
+        </div>
+    </div>
+
+    <div class="card-title row">
+        <h3>Education Info</h3>
+    </div>
+    <div class="card-body row">
+        <div class="col-xl-8 font-weight-bold">
+            <div class="row">
+                <div class="col-xl-2">RegisterDate:</div>
+                <div class="col-xl-4">{{student.RegisterDate | date}}</div>
+            </div>
+            <div class="row">
+                <div class="col-xl-2">Program:</div>
+                <div class="col-xl-4">{{student.Program}}</div>
+            </div>
+            <div class="row">
+                <div class="col-xl-2">Branch:</div>
+                <div class="col-xl-6">{{student.Branch}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-title row">
+        <h3>Document</h3>
+    </div>
+    <div class="card-body row">
+        <div class="form-group">
+            <img src={{student.DocumentPath}}>
+        </div>
+    </div>
+
+
+
+    <div class="card-footer">
+        <button type="button" class="btn btn-success btn-space btn-width" routerLink="/list">Go to List</button>
+    </div>
+</div>

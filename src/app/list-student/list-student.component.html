@@ -1,0 +1,31 @@
+<div class="container">
+    <h1>Student List</h1>
+
+    <nav>
+        <a class="btn btn-success" *ngIf="isLogged" routerLink="/add">Add New Student</a>       
+    </nav>
+    <br>
+    <div>
+        <button  *ngIf="isLogged"  class="btn btn-danger" (click)="onLogout()">Logout</button>
+    </div>
+
+    <div>
+        <button  *ngIf="!isLogged"  class="btn btn-info" (click)="onLogin()">Login</button>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Search student by the first name :</label>
+        <input type="text" class="form-control" placeholder="Search by First Name" 
+        style="width:300px" [(ngModel)]="searchTerm"/>  
+        <!-- To get the input searchTerm -->
+    </div>
+
+    <div >
+        <!-- Declar the items in students list and implement searchTerm as item filter -->
+            <!-- The filter is defined by pipe file in the pipe folder -->
+
+        <div  *ngFor="let studentItem of students | studentFilter:searchTerm"> 
+            <app-panel-student class="col-4" [student]="studentItem"></app-panel-student>   
+        </div>
+    </div>
+</div>

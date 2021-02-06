@@ -1,0 +1,108 @@
+<form ngForm>
+    <div class="container">
+        <h3 class="card-title">Edit Student</h3>          
+        <div class="card-body">        
+            <div class="form-group">
+                <label for="FirstName">First Name: </label>
+                <input id="FirstName" [(ngModel)]="student.FirstName" name="firstnameinput" #FirstNameControl="ngModel" type="text" required class="form-control">
+                <span *ngIf="FirstNameControl.invalid && FirstNameControl.touched" class="help-block">First Name is required</span>
+            </div>  
+         
+            <div class="form-group" [class.has-error]="LastNameControl.invalid && LastNameControl.touched" [class.has-success]="LastNameControl.valid">
+                    <label for="LastName">Last Name: </label>
+                    <input id="LastName" [(ngModel)]="student.LastName" name="lastnameinput" type="text" required class="form-control" #LastNameControl="ngModel">
+                    <span *ngIf="LastNameControl.invalid && LastNameControl.touched" class="help-block">Last Name is required</span>
+            </div>           
+                 
+            <div class="form-group">
+                <label>Gender</label>
+                <div class="form-control">
+                    <label class="radio-inline">
+                        <input value="Male" type="radio" name="gender" [(ngModel)]="student.Gender">
+                        Male
+                    </label>
+                    <label class="radio-inline">
+                        <input value="Female" type="radio" name="gender" [(ngModel)]="student.Gender">
+                        Female
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group" [class.has-error]="emailControl.invalid && emailControl.touched" [class.has-success]="emailControl.valid">
+                <label for="email">Email</label>
+                <input id="email" required pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" type="text" 
+                        [(ngModel)]="student.Email" name="email" #emailControl="ngModel" class="form-control">
+                <span *ngIf="emailControl.errors?.required && emailControl.touched" class="help-block">Email is required</span>
+                <span *ngIf="emailControl.errors?.pattern && emailControl.touched" class="help-block">Email is invalid</span>
+            </div>
+    
+            <div class="form-group">
+                    <label for="BirthDate">Birth Date</label>
+                    <input id="BirthDate" type="date" [(ngModel)]="student.BirthDate" name="BirthDate" class="form-control">
+            </div>
+        
+            <div class="form-group" [class.has-error]="ProgramControl.invalid && ProgramControl.touched">              
+                <label>Program</label>                    
+                <select id="Program" required name="Program" [(ngModel)]="student.Program" class="form-control" #ProgramControl="ngModel">    
+                    <option value="IT">IT</option>
+                    <option value="Mechanics">Mechanics</option>              
+                </select> 
+                <span *ngIf="ProgramControl.invalid && ProgramControl.touched " class="help-block">Please select one item</span>
+            </div>
+
+            <div class="form-group" [class.has-error]="BranchControl.invalid && BranchControl.touched">              
+                    <label>Branch</label>                    
+                    <select id="Branch" required name="Branch" [(ngModel)]="student.Branch" class="form-control" #BranchControl="ngModel">    
+                        <option *ngIf="student.Program === 'IT'" selected="selected" disabled="disabled"  style='display: none' value=''></option>
+                        <option *ngIf="student.Program === 'IT'" value="Java">Java</option>
+                        <option *ngIf="student.Program === 'IT'" value="Angular">Angular</option>
+                        <option *ngIf="student.Program === 'Mechanics'" selected="selected" disabled="disabled"  style='display: none' value=''></option>
+                        <option *ngIf="student.Program === 'Mechanics'" value="Metal Manufacturing">Metal Manufacturing</option>
+                        <option *ngIf="student.Program === 'Mechanics'" value="CAD Drafting">CAD Drafting</option>              
+                    </select> 
+                    <span *ngIf="BranchControl.invalid && BranchControl.touched " class="help-block">Please select one item</span>
+            </div>
+        
+            <div class="form-group" [class.has-error]="PhotoPathControl.invalid && PhotoPathControl.touched">              
+                    <label>Photo</label>                    
+                    <select id="PhotoPath" required name="PhotoPath" [(ngModel)]="student.PhotoPath" class="form-control" #PhotoPathControl="ngModel">    
+                        <option value="assets/studentmale.jpg">Photo Male</option>
+                        <option value="assets/studentfemale.jpg">Photo Female</option>             
+                    </select> 
+                    <span *ngIf="PhotoPathControl.invalid && PhotoPathControl.touched " class="help-block">Please select one item</span>
+            </div>
+            <div class="form-group">
+                    <img src = {{student.PhotoPath}} >
+            </div>
+        
+            <div class="form-group" [class.has-error]="DocumentPathControl.invalid && DocumentPathControl.touched">              
+                    <label>Document</label>                    
+                    <select id="DocumentPath" required name="DocumentPath" [(ngModel)]="student.DocumentPath" class="form-control" #DocumentPathControl="ngModel">    
+                        <option value="assets/TOEFL sample.png">TOEFL Score</option>
+                        <option value="assets/Diploma sample.jpg">Diploma</option>
+                        <option value="assets/Certificate sample.jpg">Certificate</option>              
+                    </select> 
+                    <span *ngIf="DocumentPathControl.invalid && DocumentPathControl.touched " class="help-block">Please select one item</span>
+            </div>
+            <div class="form-group">
+                    <img src = {{student.DocumentPath}}>
+            </div>
+
+            <div class="card-footer">
+                <button class="btn btn-primary btn-space btn-width"  (click)="goBack()">Cancel</button>
+                <button type="submit" class="btn btn-primary btn-space btn-width" (click)="updatestudent(
+                                                                                                         student.FirstName,
+                                                                                                         student.LastName,
+                                                                                                         student.Gender,
+                                                                                                         student.BirthDate,
+                                                                                                         student.Email,
+                                                                                                         student.Program,
+                                                                                                         student.Branch,
+                                                                                                         student.PhotoPath,
+                                                                                                         student.DocumentPath
+                                                                                                        )">Update student</button> 
+                <button style="position: absolute; right: 270px;" class="btn btn-danger btn-width" (click)="deleteStudent(student.mongoid)">Delete student</button>           
+            </div>
+        </div>
+    </div>
+</form>
