@@ -15,6 +15,7 @@ import { PanelStudentComponent } from './panel-student/panel-student.component';
 import { AuthInterceptor } from './Services/auth-interceptor';
 import { StudentFilterPipe } from './Pipes/student-filter.pipe';
 
+
 @NgModule({
   declarations: [
     AppComponent,
