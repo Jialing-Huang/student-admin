@@ -41,7 +41,7 @@ mongoose
   //本文件就是总，下面两个.use()就是约定了路由的分支
   app.use("/admin",adminRoute);
   app.use("/student",studentRoute);
-  app.use(express.static(__dirname + "/dist/"));
+  //app.use(express.static(__dirname + "/dist/"));
 
 
 module.exports = app;

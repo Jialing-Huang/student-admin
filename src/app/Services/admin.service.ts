@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { from, Observable, Subject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Admin } from '../Models/Admin.model';
+import { environment } from '../../environments/environment';  //注意在引入文件位置最后确定变量时选择带有"find module"注释的那个选项
+
+const BACKEND_URL = environment.apiUrl; //注意这一行的位置在@Injectable()之上
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +29,7 @@ export class AuthService {
   addAdmin(email:string, password:string):Observable<any>{
     const registerdata:Admin = { Email:email, Password:password};
     
-    return this.http.post<{message:any}>("http://localhost:8080/admin/register", registerdata)
+    return this.http.post<{message:any}>(BACKEND_URL + "/admin/register", registerdata)
                     .pipe(
                       catchError(error => { return throwError(error); })
                     );
@@ -37,7 +40,7 @@ export class AuthService {
     this.logindata.Email = email;
     this.logindata.Password = password;
 
-    this.http.post<{token:string, expiresIn:number}>("http://localhost:8080/admin/login",this.logindata)
+    this.http.post<{token:string, expiresIn:number}>(BACKEND_URL + "/admin/login",this.logindata)
                     .pipe(
                           catchError(error => { return throwError(error); })
                         )
@@ -76,7 +79,8 @@ export class AuthService {
                     );
   };
 
-  getToken(){        //To auth interceptor
+  //To auth interceptor
+  getToken(){        
     return this.servicelocaltoken;
   }
 
@@ -149,8 +153,6 @@ export class AuthService {
 
   logout(){
     this.servicelocaltoken = '';
-    //this.logindata.Email = '';
-    //this.sevicelocalexpiresIn = null;
 
     this.isAuthenticated = false;
     this.authListener.next(false);

@@ -8,7 +8,7 @@ const server = http.createServer(app);
 server.listen(port); */
 const express = require('express');
 const http = require('http');
-const app = require('./backend/app');
+const app = require('./app');
 const port = process.env.PORT || 8080;  //Create a local server port as 3000
 
 /* app.use(express.static('dist/student-admin/'));
