@@ -1,4 +1,4 @@
-<div style="width: 500px;" class="card">
+<!-- <div style="width: 500px;" class="card">
     <img style="width: 200px;height: 200px;align-self: center;" class="card-img-top" src = {{student.PhotoPath}} >
     <div style="width: 400px;" class="card-body">
         <h4 class="card-title">{{student.FirstName}}</h4>
@@ -32,5 +32,40 @@
         <button [disabled]="!isLogged" class="btn btn-primary btn-space btn-width"
             (click)="editStudent()">Edit</button>
 
+    </div>
+</div> -->
+
+
+<div style="width: 500px;" class="card">
+    <div class="card-body">
+        <img style="width: 200px;height: 200px;" class="card-img" src={{student.PhotoPath}}>
+        <div class="card-text">
+            <h4 class="card-title">{{student.FirstName}}</h4>
+            <div class="row">
+                <div style="left: 10px;" class="col-xl-6">First Name:</div>
+                <div class="col-xl-6">{{student.FirstName}}</div>
+            </div>
+
+            <div class="row">
+                <div style="left: 10px;" class="col-xl-6">Last Name:</div>
+                <div class="col-xl-6">{{student.LastName}}</div>
+            </div>
+
+            <div class="row">
+                <div style="left: 10px;" class="col-xl-6">Gender:</div>
+                <div class="col-xl-6">{{student.Gender}}</div>
+            </div>
+
+            <div class="row">
+                <div style="left: 10px;" class="col-xl-6">Birth Date:</div>
+                <div class="col-xl-6">{{student.BirthDate | date}}</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card-footer">
+        <button class="btn btn-primary btn-space btn-width" (click)="viewStudent()">Detail</button>
+        <button [disabled]="!isLogged" class="btn btn-primary btn-space btn-width" (click)="editStudent()">Edit</button>
     </div>
 </div>
